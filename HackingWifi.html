@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WiFi Scanner - BayVsCode</title>
+
+<style>
+html, body {
+    height: 100%;
+}
+
+.scan-box,
+.terminal{
+    scrollbar-width:thin;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Consolas, monospace;
+}
+
+body{
+    background:#050505;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:10px;
+    color:white;
+    overflow: hidden;
+}
+
+/* PANEL RESPONSIF */
+.panel{
+    width: 100%;
+    max-width: 360px;
+    height: 100%;
+    max-height: 740px;
+    background:#0b0b0b;
+    border:1px solid #ff1a1a;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow: 0 0 25px rgba(255,0,0,.25);
+    display: flex;
+    flex-direction: column;
+}
+
+/* SECURITY KEY SCREEN UI */
+.security-gate {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    text-align: center;
+}
+
+.security-gate .icon {
+    font-size: 45px;
+    color: #ff1a1a;
+    text-shadow: 0 0 15px red;
+    margin-bottom: 20px;
+    animation: blink 2s infinite;
+}
+
+.security-gate h2 {
+    font-size: 15px;
+    color: #ff4d4d;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.security-gate p {
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 25px;
+    line-height: 1.4;
+}
+
+.key-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.key-form input {
+    width: 100%;
+    background: #050505;
+    border: 1px solid rgba(255, 0, 0, 0.4);
+    border-radius: 6px;
+    outline: none;
+    color: white;
+    padding: 12px;
+    font-size: 12px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.key-form input:focus {
+    border-color: #ff1a1a;
+    box-shadow: 0 0 8px rgba(255, 0, 0, 0.3);
+}
+
+/* TOMBOL UI DI BAGIAN LOCK */
+.lock-btn-ui {
+    width: 100%;
+    background: #140000;
+    border: 1px solid #ff1a1a;
+    color: #ff4d4d;
+    font-family: Consolas, monospace;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.15);
+    transition: 0.2s;
+    text-shadow: 0 0 3px red;
+}
+
+.lock-btn-ui:hover {
+    background: #ff1a1a;
+    color: white;
+    box-shadow: 0 0 15px red;
+    text-shadow: none;
+}
+
+/* TOMBOL BUY PASSWORD DI LOCK SCREEN */
+.lock-btn-buy {
+    width: 100%;
+    background: transparent;
+    border: 1px solid #ffd75f;
+    color: #ffd75f;
+    font-family: Consolas, monospace;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(255, 215, 95, 0.1);
+    transition: 0.2s;
+    text-decoration: none;
+    display: inline-block;
+    text-shadow: 0 0 3px rgba(255, 215, 95, 0.5);
+}
+
+.lock-btn-buy:hover {
+    background: #ffd75f;
+    color: black;
+    box-shadow: 0 0 15px #ffd75f;
+    text-shadow: none;
+}
+
+.error-msg {
+    color: #ff3b3b;
+    font-size: 11px;
+    margin-top: 15px;
+    height: 15px;
+    font-weight: bold;
+}
+
+/* DASHBOARD */
+.dashboard-content {
+    display: none;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+/* HEADER */
+.header{
+    padding:12px;
+    background:linear-gradient(90deg,#140000,#2b0000,#140000);
+    border-bottom:1px solid red;
+    flex-shrink: 0;
+}
+
+.top-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.title{
+    font-size:14px;
+    color:#ff4d4d;
+    font-weight:bold;
+    text-shadow:0 0 8px red;
+}
+
+.live{
+    color:#7dff7d;
+    font-size:10px;
+}
+
+.info{
+    margin-top:6px;
+    line-height:1.6;
+    font-size:10px;
+    color:#c7c7c7;
+}
+
+/* WRAPPERS */
+.scan-wrapper{
+    margin: 10px 10px 5px 10px;
+    border:1px solid rgba(255,0,0,.25);
+    border-radius:15px;
+    overflow:hidden;
+    background:#070707;
+    flex: 1.3;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.terminal-wrapper{
+    margin: 5px 10px 10px 10px;
+    border:1px solid rgba(255,0,0,.25);
+    border-radius:15px;
+    overflow:hidden;
+    background:#050505;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.scan-title {
+    padding:8px 12px;
+    font-size:11px;
+    font-weight:bold;
+    letter-spacing:1px;
+    flex-shrink: 0;
+    background: linear-gradient(90deg, rgba(255,0,0,.15), transparent);
+    color:#ff4b4b;
+    border-bottom:1px solid rgba(255,0,0,.25);
+}
+
+/* HEADER TERMINAL DENGAN TOMBOL SCAN DI SAMPING */
+.terminal-title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 12px;
+    border-bottom: 1px solid rgba(255,0,0,.25);
+    background: linear-gradient(90deg, rgba(255,0,0,.15), transparent);
+    flex-shrink: 0;
+}
+
+.terminal-title {
+    color: #ff5c5c;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* UI TOMBOL SCANNING DI SAMPING JUDUL LOG */
+.terminal-btn-scan {
+    background: transparent;
+    border: 1px solid #ffd75f;
+    color: #ffd75f;
+    padding: 3px 8px;
+    font-size: 9px;
+    font-family: Consolas, monospace;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 0.2s;
+    box-shadow: 0 0 5px rgba(255, 215, 95, 0.2);
+}
+
+.terminal-btn-scan:hover {
+    border-color: #64ff64;
+    color: #64ff64;
+    box-shadow: 0 0 8px rgba(100, 255, 100, 0.4);
+}
+
+/* BOX SCROLLABLE */
+.scan-box{
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px;
+}
+
+.terminal{
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px;
+    background: linear-gradient(to bottom, #070000, #120000);
+}
+
+/* WIFI CARD */
+.wifi{
+    background: linear-gradient(145deg, #111111, #070707);
+    border:1px solid #1f1f1f;
+    border-left:4px solid #ff2a2a;
+    border-radius:12px;
+    padding:8px;
+    margin-bottom:8px;
+    position:relative;
+    overflow:hidden;
+    box-shadow: 0 0 12px rgba(255,0,0,.12), inset 0 0 15px rgba(255,255,255,.02);
+    transition:.25s;
+}
+
+.wifi:hover{
+    transform:translateY(-1px);
+    box-shadow: 0 0 14px rgba(255,0,0,.35);
+}
+
+.wifi::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:2px;
+    background: linear-gradient(90deg, transparent, red, transparent);
+    opacity:.7;
+}
+
+.wifi-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.name{
+    font-size:11px;
+    font-weight:bold;
+    color:white;
+    letter-spacing:.5px;
+}
+
+.signal{
+    font-size:10px;
+    color:#ff5b5b;
+    font-weight:bold;
+    text-shadow:0 0 6px red;
+}
+
+.pass{
+    margin-top:6px;
+    color:#7dff7d;
+    font-size:10px;
+    line-height:1.4;
+}
+
+.ip{
+    margin-top:4px;
+    color:#7f7f7f;
+    font-size:9px;
+    opacity:.9;
+}
+
+/* TEXT TERMINAL */
+.line{
+    color:#ff7070;
+    font-size:9px;
+    line-height:1.4;
+    margin-bottom:4px;
+}
+
+/* TERMINAL CURSOR */
+.blink{
+    color:#79ff79;
+    animation:blink 1s infinite;
+}
+
+@keyframes blink{
+    50%{ opacity:0; }
+}
+
+::-webkit-scrollbar{
+    width:3px;
+}
+::-webkit-scrollbar-thumb{
+    background:red;
+}
+</style>
+</head>
+
+<body>
+
+<div class="panel">
+
+    <!-- GERBANG KEAMANAN LOCK SCREEN -->
+    <div class="security-gate" id="securityGate">
+        <div class="icon">🔒</div>
+        <h2>SYSTEM ACCESS REQUIRED</h2>
+        <p>Silahkan masukkan Access Key untuk masuk ke dashboard.</p>
+        
+        <div class="key-form">
+            <input type="password" id="accessKey" placeholder="MASUKKAN KEY..." autocomplete="off">
+            <button class="lock-btn-ui" onclick="verifyKey()">[ MASUKAN PASSWORD / KEY ]</button>
+            
+            <!-- TOMBOL BUY PASSWORD DIARAHKAN KE LINK WA ANDA -->
+            <a href="https://wa.me/6285859376340?text=Halo%20BayVsCode%2C%20saya%20ingin%20membeli%20key%20access%20untuk%20WiFi%20Scanner%20system." target="_blank" class="lock-btn-buy">
+                [ BUY PASSWORD / KEY ]
+            </a>
+        </div>
+        
+        <div class="error-msg" id="errorMsg"></div>
+    </div>
+
+    <!-- MAIN DASHBOARD CONTENT -->
+    <div class="dashboard-content" id="dashboardContent">
+        <div class="header">
+            <div class="top-header">
+                <div class="title">WIFI SCANNING SYSTEM</div>
+                <div class="live" id="liveStatus" style="color: #ff3b3b;">● STANDBY</div>
+            </div>
+            <div class="info">
+                DEVICE IP : <span id="deviceIp">--.---.---.--</span><br>
+                TIME : <span id="clock">00:00:00</span><br>
+                STATUS : <span id="systemStatusText" style="color: #ff3b3b; font-weight: bold;">OFFLINE (WAITING TRIGGER)</span>
+            </div>
+        </div>
+
+        <div class="scan-wrapper">
+            <div class="scan-title">
+                // JARINGAN YANG TERDETEKSI
+            </div>
+            <div class="scan-box" id="wifiList"></div>
+        </div>
+
+        <div class="terminal-wrapper">
+            <div class="terminal-title-container">
+                <div class="terminal-title">// TERMINAL SYSTEM LOG</div>
+                <button class="terminal-btn-scan" id="btnScanTrigger" onclick="activateScanner()">[ SCANNING ]</button>
+            </div>
+
+            <div class="terminal" id="terminal">
+                <div class="line" id="statusLine">root@bayvscodeid:~# system_status: OFF <span class="blink">_</span></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+// DAFTAR KEY VALID
+const validKeys = [
+    "bayvscodeid",
+    "bayvscodeid01",
+    "bayvscodeid02",
+    "bayvscodeid03",
+    "bayvscodeid04",
+    "bayvscodeid05",
+    "bayvscodeid06",
+    "bayvscodeid07"
+];
+
+function verifyKey() {
+    const inputKey = document.getElementById("accessKey").value.trim();
+    const errorMsg = document.getElementById("errorMsg");
+
+    if (validKeys.includes(inputKey)) {
+        document.getElementById("securityGate").style.display = "none";
+        document.getElementById("dashboardContent").style.display = "flex"; 
+        initClock();
+    } else {
+        errorMsg.innerHTML = "ACCESS DENIED: Key Salah!";
+        document.getElementById("accessKey").value = "";
+        setTimeout(() => { errorMsg.innerHTML = ""; }, 3000);
+    }
+}
+
+document.getElementById("accessKey").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        verifyKey();
+    }
+});
+
+function rand(){ return Math.floor(Math.random()*255); }
+function randomIP(){ return `${rand()}.${rand()}.${rand()}.${rand()}`; }
+
+function initClock() {
+    function updateClock(){
+        const d = new Date();
+        const h = String(d.getHours()).padStart(2,"0");
+        const m = String(d.getMinutes()).padStart(2,"0");
+        const s = String(d.getSeconds()).padStart(2,"0");
+        document.getElementById("clock").innerHTML = `${h}:${m}:${s}`;
+    }
+    updateClock();
+    setInterval(updateClock,1000);
+}
+
+/* === AKTIVASI SCANNING === */
+function activateScanner() {
+    const btn = document.getElementById("btnScanTrigger");
+    btn.disabled = true;
+    btn.style.borderColor = "#64ff64";
+    btn.style.color = "#64ff64";
+    btn.innerHTML = "[ ACTIVE ]";
+
+    document.getElementById("statusLine").innerHTML = "root@bayvscodeid:~# system_status: ON";
+    
+    document.getElementById("liveStatus").innerHTML = "● LIVE";
+    document.getElementById("liveStatus").style.color = "#7dff7d";
+    document.getElementById("systemStatusText").innerHTML = "MONITORING SYSTEM AKTIF";
+    document.getElementById("systemStatusText").style.color = "white";
+    document.getElementById("deviceIp").innerHTML = randomIP();
+
+    const wifiDatabase = [
+        { name:"Bagas Agung Wijaya", pass:"tanyabagasAja" },
+        { name:"Warkop Wifi Cafe", pass:"belidulu108" },
+        { name:"Kost SamaRindah", pass:"bayarkosttepatwaktu" },
+        { name:"Cantika Aisyah", pass:"cantikasiyah" },
+        { name:"Tower 774992", pass:"indonesiatower774992" },
+        { name:"Jamal Udin", pass:"hanyakamu" },
+        { name:"MEGADATA.NET.ID", pass:"Unknow" },
+        { name:"BayVsCode ID", pass:"bayvscodeidoffcial" }
+    ];
+
+    const signals = [ "▂▄ Lemah", "▂▄▆ sedang", "▂▄▆█ Kuat" ];
+    function randomSignal(){ return signals[Math.floor(Math.random()*signals.length)]; }
+
+    const terminal = document.getElementById("terminal");
+    function log(text){
+        const div = document.createElement("div");
+        div.className = "line";
+        div.innerHTML = "root@scanner:~# " + text;
+        terminal.appendChild(div);
+        terminal.scrollTop = terminal.scrollHeight;
+    }
+
+    setTimeout(() => {
+        log("memulai system wireless environment scanner...");
+        log("system monitor telah dikunci & aktif");
+    }, 400);
+
+    const wifiList = document.getElementById("wifiList");
+    function addWifi(data){
+        log("scanning target : " + data.name);
+        setTimeout(()=>{ log("detecting signal..."); }, 500);
+        setTimeout(()=>{ log("checking gateway..."); }, 900);
+        setTimeout(()=>{ log("retrieving metadata..."); }, 1300);
+        setTimeout(()=>{
+            const wifi = document.createElement("div");
+            wifi.className = "wifi";
+            wifi.innerHTML = `
+            <div class="wifi-top">
+                <div class="name">${data.name}</div>
+                <div class="signal">${randomSignal()}</div>
+            </div>
+            <div class="pass">Password : ${data.pass}</div>
+            <div class="ip">IP Server : ${randomIP()}</div>`;
+            
+            wifiList.prepend(wifi);
+            log(data.name + " detected");
+        }, 1800);
+    }
+
+    const total = Math.floor(Math.random()*5)+3;
+    const shuffled = [...wifiDatabase].sort(() => Math.random() - 0.5);
+    const generated = shuffled.slice(0,total);
+
+    generated.forEach((wifi,index)=>{
+        setTimeout(()=>{ addWifi(wifi); }, index * 2200);
+    });
+
+    const randomLogs = [
+        "packet listener enabled...",
+        "gateway stable...",
+        "monitoring nearby signal...",
+        "updating metadata...",
+        "wireless monitor active..."
+    ];
+
+    setInterval(()=>{
+        const txt = randomLogs[Math.floor(Math.random()*randomLogs.length)];
+        log(txt);
+    }, 4000);
+}
+</script>
+
+</body>
+</html>
