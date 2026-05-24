@@ -23,7 +23,7 @@ html, body {
 }
 
 body{
-    background:#050505;
+    background:#02050a; /* Hitam kebiruan */
     display:flex;
     justify-content:center;
     align-items:center;
@@ -38,11 +38,11 @@ body{
     max-width: 360px;
     height: 100%;
     max-height: 740px;
-    background:#0b0b0b;
-    border:1px solid #ff1a1a;
+    background:#050d1a; /* Biru sangat tua */
+    border:1px solid #00d2ff; /* Border biru muda */
     border-radius:18px;
     overflow:hidden;
-    box-shadow: 0 0 25px rgba(255,0,0,.25);
+    box-shadow: 0 0 25px rgba(0, 210, 255, 0.25); /* Glow efek biru muda */
     display: flex;
     flex-direction: column;
 }
@@ -60,22 +60,22 @@ body{
 
 .security-gate .icon {
     font-size: 45px;
-    color: #ff1a1a;
-    text-shadow: 0 0 15px red;
+    color: #00d2ff; /* Biru muda */
+    text-shadow: 0 0 15px #00d2ff;
     margin-bottom: 20px;
     animation: blink 2s infinite;
 }
 
 .security-gate h2 {
     font-size: 15px;
-    color: #ff4d4d;
+    color: #8ae4ff; /* Biru muda terang */
     margin-bottom: 10px;
     letter-spacing: 1px;
 }
 
 .security-gate p {
     font-size: 11px;
-    color: #888;
+    color: #6a82a4; /* Biru abu-abu */
     margin-bottom: 25px;
     line-height: 1.4;
 }
@@ -89,8 +89,8 @@ body{
 
 .key-form input {
     width: 100%;
-    background: #050505;
-    border: 1px solid rgba(255, 0, 0, 0.4);
+    background: #02050a;
+    border: 1px solid rgba(0, 210, 255, 0.4);
     border-radius: 6px;
     outline: none;
     color: white;
@@ -101,31 +101,31 @@ body{
 }
 
 .key-form input:focus {
-    border-color: #ff1a1a;
-    box-shadow: 0 0 8px rgba(255, 0, 0, 0.3);
+    border-color: #00d2ff;
+    box-shadow: 0 0 8px rgba(0, 210, 255, 0.3);
 }
 
 /* TOMBOL UI DI BAGIAN LOCK */
 .lock-btn-ui {
     width: 100%;
-    background: #140000;
-    border: 1px solid #ff1a1a;
-    color: #ff4d4d;
+    background: #002244; /* Biru tua */
+    border: 1px solid #00d2ff; /* Biru muda */
+    color: #8ae4ff;
     font-family: Consolas, monospace;
     font-size: 12px;
     font-weight: bold;
     padding: 12px;
     border-radius: 6px;
     cursor: pointer;
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.15);
+    box-shadow: 0 0 10px rgba(0, 210, 255, 0.15);
     transition: 0.2s;
-    text-shadow: 0 0 3px red;
+    text-shadow: 0 0 3px #00d2ff;
 }
 
 .lock-btn-ui:hover {
-    background: #ff1a1a;
-    color: white;
-    box-shadow: 0 0 15px red;
+    background: #00d2ff;
+    color: #050d1a;
+    box-shadow: 0 0 15px #00d2ff;
     text-shadow: none;
 }
 
@@ -133,25 +133,25 @@ body{
 .lock-btn-buy {
     width: 100%;
     background: transparent;
-    border: 1px solid #ffd75f;
-    color: #ffd75f;
+    border: 1px solid #0088ff; /* Biru medium */
+    color: #00d2ff;
     font-family: Consolas, monospace;
     font-size: 11px;
     font-weight: bold;
     padding: 10px;
     border-radius: 6px;
     cursor: pointer;
-    box-shadow: 0 0 8px rgba(255, 215, 95, 0.1);
+    box-shadow: 0 0 8px rgba(0, 136, 255, 0.1);
     transition: 0.2s;
     text-decoration: none;
     display: inline-block;
-    text-shadow: 0 0 3px rgba(255, 215, 95, 0.5);
+    text-shadow: 0 0 3px rgba(0, 210, 255, 0.5);
 }
 
 .lock-btn-buy:hover {
-    background: #ffd75f;
-    color: black;
-    box-shadow: 0 0 15px #ffd75f;
+    background: #0088ff;
+    color: white;
+    box-shadow: 0 0 15px #0088ff;
     text-shadow: none;
 }
 
@@ -171,12 +171,39 @@ body{
     width: 100%;
 }
 
-/* HEADER */
+/* HEADER WITH PROFILE */
 .header{
     padding:12px;
-    background:linear-gradient(90deg,#140000,#2b0000,#140000);
-    border-bottom:1px solid red;
+    background:linear-gradient(90deg,#001122,#002244,#001122); /* Gradasi Biru Tua */
+    border-bottom:1px solid #00d2ff;
     flex-shrink: 0;
+}
+
+/* UI PROFIL BARU */
+.profile-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(0, 210, 255, 0.3);
+}
+
+.profile-logo {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid #00d2ff;
+    box-shadow: 0 0 8px rgba(0, 210, 255, 0.5);
+    object-fit: cover;
+}
+
+.profile-name {
+    font-size: 11px;
+    font-weight: bold;
+    color: #8ae4ff;
+    letter-spacing: 1px;
+    text-shadow: 0 0 5px rgba(0, 210, 255, 0.5);
 }
 
 .top-header{
@@ -186,10 +213,10 @@ body{
 }
 
 .title{
-    font-size:14px;
-    color:#ff4d4d;
+    font-size:12px;
+    color:#8ae4ff;
     font-weight:bold;
-    text-shadow:0 0 8px red;
+    text-shadow:0 0 8px #00d2ff;
 }
 
 .live{
@@ -207,10 +234,10 @@ body{
 /* WRAPPERS */
 .scan-wrapper{
     margin: 10px 10px 5px 10px;
-    border:1px solid rgba(255,0,0,.25);
+    border:1px solid rgba(0, 210, 255, 0.25);
     border-radius:15px;
     overflow:hidden;
-    background:#070707;
+    background:#030a16;
     flex: 1.3;
     display: flex;
     flex-direction: column;
@@ -219,10 +246,10 @@ body{
 
 .terminal-wrapper{
     margin: 5px 10px 10px 10px;
-    border:1px solid rgba(255,0,0,.25);
+    border:1px solid rgba(0, 210, 255, 0.25);
     border-radius:15px;
     overflow:hidden;
-    background:#050505;
+    background:#020612;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -235,9 +262,9 @@ body{
     font-weight:bold;
     letter-spacing:1px;
     flex-shrink: 0;
-    background: linear-gradient(90deg, rgba(255,0,0,.15), transparent);
-    color:#ff4b4b;
-    border-bottom:1px solid rgba(255,0,0,.25);
+    background: linear-gradient(90deg, rgba(0, 210, 255, 0.15), transparent);
+    color:#00d2ff;
+    border-bottom:1px solid rgba(0, 210, 255, 0.25);
 }
 
 /* HEADER TERMINAL DENGAN TOMBOL SCAN DI SAMPING */
@@ -246,23 +273,29 @@ body{
     justify-content: space-between;
     align-items: center;
     padding: 6px 12px;
-    border-bottom: 1px solid rgba(255,0,0,.25);
-    background: linear-gradient(90deg, rgba(255,0,0,.15), transparent);
+    border-bottom: 1px solid rgba(0, 210, 255, 0.25);
+    background: linear-gradient(90deg, rgba(0, 210, 255, 0.15), transparent);
     flex-shrink: 0;
 }
 
 .terminal-title {
-    color: #ff5c5c;
+    color: #00d2ff;
     font-size: 11px;
     font-weight: bold;
     letter-spacing: 1px;
 }
 
+/* CONTAINER GRUP TOMBOL SCAN & STOP */
+.scan-controls-group {
+    display: flex;
+    gap: 6px;
+}
+
 /* UI TOMBOL SCANNING DI SAMPING JUDUL LOG */
 .terminal-btn-scan {
     background: transparent;
-    border: 1px solid #ffd75f;
-    color: #ffd75f;
+    border: 1px solid #0088ff;
+    color: #00d2ff;
     padding: 3px 8px;
     font-size: 9px;
     font-family: Consolas, monospace;
@@ -270,13 +303,35 @@ body{
     cursor: pointer;
     border-radius: 4px;
     transition: 0.2s;
-    box-shadow: 0 0 5px rgba(255, 215, 95, 0.2);
+    box-shadow: 0 0 5px rgba(0, 210, 255, 0.2);
 }
 
 .terminal-btn-scan:hover {
     border-color: #64ff64;
     color: #64ff64;
     box-shadow: 0 0 8px rgba(100, 255, 100, 0.4);
+}
+
+/* UI TOMBOL STOP SCANNING */
+.terminal-btn-stop {
+    background: transparent;
+    border: 1px solid #ff3b3b;
+    color: #ff3b3b;
+    padding: 3px 8px;
+    font-size: 9px;
+    font-family: Consolas, monospace;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 0.2s;
+    box-shadow: 0 0 5px rgba(255, 59, 59, 0.2);
+    display: none; /* Disembunyikan saat standby */
+}
+
+.terminal-btn-stop:hover {
+    background: #ff3b3b;
+    color: white;
+    box-shadow: 0 0 8px rgba(255, 59, 59, 0.5);
 }
 
 /* BOX SCROLLABLE */
@@ -290,26 +345,26 @@ body{
     flex: 1;
     overflow-y: auto;
     padding: 8px;
-    background: linear-gradient(to bottom, #070000, #120000);
+    background: linear-gradient(to bottom, #020612, #001122);
 }
 
 /* WIFI CARD */
 .wifi{
-    background: linear-gradient(145deg, #111111, #070707);
-    border:1px solid #1f1f1f;
-    border-left:4px solid #ff2a2a;
+    background: linear-gradient(145deg, #06152d, #030a16);
+    border:1px solid #0b2244;
+    border-left:4px solid #00d2ff;
     border-radius:12px;
     padding:8px;
     margin-bottom:8px;
     position:relative;
     overflow:hidden;
-    box-shadow: 0 0 12px rgba(255,0,0,.12), inset 0 0 15px rgba(255,255,255,.02);
+    box-shadow: 0 0 12px rgba(0, 210, 255, 0.12), inset 0 0 15px rgba(255,255,255,.02);
     transition:.25s;
 }
 
 .wifi:hover{
     transform:translateY(-1px);
-    box-shadow: 0 0 14px rgba(255,0,0,.35);
+    box-shadow: 0 0 14px rgba(0, 210, 255, 0.35);
 }
 
 .wifi::before{
@@ -319,7 +374,7 @@ body{
     left:0;
     width:100%;
     height:2px;
-    background: linear-gradient(90deg, transparent, red, transparent);
+    background: linear-gradient(90deg, transparent, #00d2ff, transparent);
     opacity:.7;
 }
 
@@ -338,9 +393,9 @@ body{
 
 .signal{
     font-size:10px;
-    color:#ff5b5b;
+    color:#8ae4ff;
     font-weight:bold;
-    text-shadow:0 0 6px red;
+    text-shadow:0 0 6px #00d2ff;
 }
 
 .pass{
@@ -352,17 +407,51 @@ body{
 
 .ip{
     margin-top:4px;
-    color:#7f7f7f;
+    color:#6a82a4;
     font-size:9px;
     opacity:.9;
 }
 
 /* TEXT TERMINAL */
 .line{
-    color:#ff7070;
+    color:#8ae4ff;
     font-size:9px;
     line-height:1.4;
     margin-bottom:4px;
+}
+
+/* CONTAINER TOMBOL DI BAGIAN BAWAH DASHBOARD */
+.footer-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 0 10px 10px 10px;
+    flex-shrink: 0;
+}
+
+.footer-btn {
+    background: #001a33;
+    border: 1px solid #00d2ff;
+    color: #00d2ff;
+    font-family: Consolas, monospace;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 0 8px rgba(0, 210, 255, 0.15);
+    transition: 0.2s;
+    text-shadow: 0 0 3px #00d2ff;
+    white-space: nowrap;
+}
+
+.footer-btn:hover {
+    background: #00d2ff;
+    color: #050d1a;
+    box-shadow: 0 0 12px #00d2ff;
+    text-shadow: none;
 }
 
 /* TERMINAL CURSOR */
@@ -379,7 +468,7 @@ body{
     width:3px;
 }
 ::-webkit-scrollbar-thumb{
-    background:red;
+    background:#00d2ff;
 }
 </style>
 </head>
@@ -395,10 +484,9 @@ body{
         <p>Silahkan masukkan Access Key untuk masuk ke dashboard.</p>
         
         <div class="key-form">
-            <input type="password" id="accessKey" placeholder="MASUKKAN KEY..." autocomplete="off">
+            <input type="password" id="accessKey" placeholder="MASUKKAN PASSWORD" autocomplete="off">
             <button class="lock-btn-ui" onclick="verifyKey()">[ MASUKAN PASSWORD / KEY ]</button>
             
-            <!-- TOMBOL BUY PASSWORD DIARAHKAN KE LINK WA ANDA -->
             <a href="https://wa.me/6285859376340?text=Halo%20BayVsCode%2C%20saya%20ingin%20membeli%20key%20access%20untuk%20WiFi%20Scanner%20system." target="_blank" class="lock-btn-buy">
                 [ BUY PASSWORD / KEY ]
             </a>
@@ -410,6 +498,12 @@ body{
     <!-- MAIN DASHBOARD CONTENT -->
     <div class="dashboard-content" id="dashboardContent">
         <div class="header">
+            <!-- SECTION PROFIL -->
+            <div class="profile-section">
+                <img src="https://files.catbox.moe/ngk01z.png" alt="Logo" class="profile-logo">
+                <div class="profile-name">BAYVSCODE ID OFFCIAL</div>
+            </div>
+
             <div class="top-header">
                 <div class="title">WIFI SCANNING SYSTEM</div>
                 <div class="live" id="liveStatus" style="color: #ff3b3b;">● STANDBY</div>
@@ -431,12 +525,25 @@ body{
         <div class="terminal-wrapper">
             <div class="terminal-title-container">
                 <div class="terminal-title">// TERMINAL SYSTEM LOG</div>
-                <button class="terminal-btn-scan" id="btnScanTrigger" onclick="activateScanner()">[ SCANNING ]</button>
+                <div class="scan-controls-group">
+                    <button class="terminal-btn-stop" id="btnScanStop" onclick="stopScanner()">[ STOP ]</button>
+                    <button class="terminal-btn-scan" id="btnScanTrigger" onclick="activateScanner()">[ SCANNING ]</button>
+                </div>
             </div>
 
             <div class="terminal" id="terminal">
                 <div class="line" id="statusLine">root@bayvscodeid:~# system_status: OFF <span class="blink">_</span></div>
             </div>
+        </div>
+
+        <!-- LAYOUT TOMBOL DI BAGIAN PALING BAWAH -->
+        <div class="footer-buttons">
+            <a href="https://whatsapp.com/channel/0029VbCvWwLDp2QCKccXJQ2l" target="_blank" class="footer-btn">
+                [ CHANNEL WHATSAPP ]
+            </a>
+            <a href="https://wa.me/6285859376340?text=Halo%20Admin%20BayVsCode%2C%20saya%20ingin%20bertanya%20mengenai%20sistem." target="_blank" class="footer-btn">
+                [ CONTACT ADMIN ]
+            </a>
         </div>
     </div>
 
@@ -446,14 +553,11 @@ body{
 // DAFTAR KEY VALID
 const validKeys = [
     "bayvscodeid",
-    "bayvscodeid01",
-    "bayvscodeid02",
-    "bayvscodeid03",
-    "bayvscodeid04",
-    "bayvscodeid05",
-    "bayvscodeid06",
     "bayvscodeid07"
 ];
+
+let scanTimers = [];
+let loopIntervalId = null;
 
 function verifyKey() {
     const inputKey = document.getElementById("accessKey").value.trim();
@@ -491,13 +595,25 @@ function initClock() {
     setInterval(updateClock,1000);
 }
 
+function logToTerminal(text){
+    const terminal = document.getElementById("terminal");
+    const div = document.createElement("div");
+    div.className = "line";
+    div.innerHTML = "root@scanner:~# " + text;
+    terminal.appendChild(div);
+    terminal.scrollTop = terminal.scrollHeight;
+}
+
 /* === AKTIVASI SCANNING === */
 function activateScanner() {
-    const btn = document.getElementById("btnScanTrigger");
-    btn.disabled = true;
-    btn.style.borderColor = "#64ff64";
-    btn.style.color = "#64ff64";
-    btn.innerHTML = "[ ACTIVE ]";
+    const btnScan = document.getElementById("btnScanTrigger");
+    const btnStop = document.getElementById("btnScanStop");
+    
+    // Sembunyikan total tombol scanning agar tidak menumpuk saat ON
+    btnScan.style.display = "none";
+    
+    // Munculkan tombol STOP
+    btnStop.style.display = "inline-block";
 
     document.getElementById("statusLine").innerHTML = "root@bayvscodeid:~# system_status: ON";
     
@@ -515,33 +631,27 @@ function activateScanner() {
         { name:"Tower 774992", pass:"indonesiatower774992" },
         { name:"Jamal Udin", pass:"hanyakamu" },
         { name:"MEGADATA.NET.ID", pass:"Unknow" },
-        { name:"BayVsCode ID", pass:"bayvscodeidoffcial" }
+        { name:"BayVsCode ID", pass:"bayvscodeidoffcial" },
+        { name:"ORLIN", pass:"12345678" },
+        { name:"Rizky Saputra", pass:"mintapassword" },
+        { name:"YTTA AJA", pass:"tanyasiapaya" },
+        { name:"Agung Wijaya", pass:"masagung" },
+        { name:"ERLITA", pass:"Sugeng11" }
     ];
 
     const signals = [ "▂▄ Lemah", "▂▄▆ sedang", "▂▄▆█ Kuat" ];
     function randomSignal(){ return signals[Math.floor(Math.random()*signals.length)]; }
 
-    const terminal = document.getElementById("terminal");
-    function log(text){
-        const div = document.createElement("div");
-        div.className = "line";
-        div.innerHTML = "root@scanner:~# " + text;
-        terminal.appendChild(div);
-        terminal.scrollTop = terminal.scrollHeight;
-    }
-
-    setTimeout(() => {
-        log("memulai system wireless environment scanner...");
-        log("system monitor telah dikunci & aktif");
-    }, 400);
+    scanTimers.push(setTimeout(() => { logToTerminal("memulai system wireless environment scanner..."); }, 400));
+    scanTimers.push(setTimeout(() => { logToTerminal("system monitor telah dikunci & aktif"); }, 800));
 
     const wifiList = document.getElementById("wifiList");
     function addWifi(data){
-        log("scanning target : " + data.name);
-        setTimeout(()=>{ log("detecting signal..."); }, 500);
-        setTimeout(()=>{ log("checking gateway..."); }, 900);
-        setTimeout(()=>{ log("retrieving metadata..."); }, 1300);
-        setTimeout(()=>{
+        logToTerminal("scanning target : " + data.name);
+        scanTimers.push(setTimeout(()=>{ logToTerminal("detecting signal..."); }, 500));
+        scanTimers.push(setTimeout(()=>{ logToTerminal("checking gateway..."); }, 900));
+        scanTimers.push(setTimeout(()=>{ logToTerminal("retrieving metadata..."); }, 1300));
+        scanTimers.push(setTimeout(()=>{
             const wifi = document.createElement("div");
             wifi.className = "wifi";
             wifi.innerHTML = `
@@ -553,32 +663,66 @@ function activateScanner() {
             <div class="ip">IP Server : ${randomIP()}</div>`;
             
             wifiList.prepend(wifi);
-            log(data.name + " detected");
-        }, 1800);
+            logToTerminal(data.name + " detected");
+        }, 1800));
     }
 
-    const total = Math.floor(Math.random()*5)+3;
+    const total = Math.floor(Math.random()*3)+3;
     const shuffled = [...wifiDatabase].sort(() => Math.random() - 0.5);
     const generated = shuffled.slice(0,total);
 
     generated.forEach((wifi,index)=>{
-        setTimeout(()=>{ addWifi(wifi); }, index * 2200);
+        scanTimers.push(setTimeout(()=>{ addWifi(wifi); }, index * 2200 + 1200));
     });
 
-    const randomLogs = [
-        "packet listener enabled...",
-        "gateway stable...",
-        "monitoring nearby signal...",
-        "updating metadata...",
-        "wireless monitor active..."
+        const randomLogs = [
+        "pendengar paket diaktifkan...",
+        "gerbang jalur (gateway) stabil...",
+        "memantau sinyal sekitar...",
+        "memperbarui data metadata...",
+        "pemantau nirkabel aktif...",
+        "menyaring lalu lintas jaringan...",
+        "mengecek stabilitas koneksi...",
+        "menganalisis paket data masuk...",
+        "memindai enkripsi keamanan...",
+        "saluran log sistem diperbarui..."
     ];
 
-    setInterval(()=>{
+
+    loopIntervalId = setInterval(()=>{
         const txt = randomLogs[Math.floor(Math.random()*randomLogs.length)];
-        log(txt);
+        logToTerminal(txt);
     }, 4000);
+}
+
+/* === FITUR STOP SCANNING === */
+function stopScanner() {
+    const btnScan = document.getElementById("btnScanTrigger");
+    const btnStop = document.getElementById("btnScanStop");
+
+    scanTimers.forEach(timer => clearTimeout(timer));
+    scanTimers = [];
+    if (loopIntervalId) {
+        clearInterval(loopIntervalId);
+        loopIntervalId = null;
+    }
+
+    document.getElementById("statusLine").innerHTML = 'root@bayvscodeid:~# system_status: OFF <span class="blink">_</span>';
+    document.getElementById("liveStatus").innerHTML = "● STANDBY";
+    document.getElementById("liveStatus").style.color = "#ff3b3b";
+    document.getElementById("systemStatusText").innerHTML = "OFFLINE (WAITING TRIGGER)";
+    document.getElementById("systemStatusText").style.color = "#ff3b3b";
+    
+    logToTerminal("⚠️ PROSES DIHENTIKAN USER");
+
+    // Munculkan kembali tombol SCANNING asli ke semula
+    btnScan.style.display = "inline-block";
+    
+    // Sembunyikan tombol STOP
+    btnStop.style.display = "none";
 }
 </script>
 
 </body>
 </html>
+ 
